@@ -4,7 +4,7 @@ import usePacMan from "./usePacman";
 import { Cell, GameBoard, GameStatus } from "../components/Game/Game";
 import {
   // shadowBlinkyAI,
-  speedyPinkyAI,
+  // speedyPinkyAI,
   // bashfulInkyAI,
   pokeyClydeAI,
 } from "../services/ghostLogics";
@@ -20,7 +20,7 @@ const usePacManGame = (
 
   let initialPacManPos = { x: -1, y: -1 };
   // let initialRedGhostPos = { x: -1, y: -1 };
-  let initialPinkGhostPos = { x: -1, y: -1 };
+  // let initialPinkGhostPos = { x: -1, y: -1 };
   // let initialBlueGhostPos = { x: -1, y: -1 };
   let initialOrangeGhostPos = { x: -1, y: -1 };
 
@@ -30,9 +30,9 @@ const usePacManGame = (
         // case Cell.RedGhost:
         // initialRedGhostPos = { x, y };
         // break;
-        case Cell.PinkGhost:
-          initialPinkGhostPos = { x, y };
-          break;
+        // case Cell.PinkGhost:
+        //   initialPinkGhostPos = { x, y };
+        // break;
         // case Cell.BlueGhost:
         // initialBlueGhostPos = { x, y };
         // break;
@@ -59,7 +59,7 @@ const usePacManGame = (
     setGameStatus(GameStatus.Ready);
     setGameBoard(originalGameBoard.map((row) => [...row]));
     // setRedGhostPos(initialRedGhostPos);
-    setPinkGhostPos(initialPinkGhostPos);
+    // setPinkGhostPos(initialPinkGhostPos);
     // setBlueGhostPos(initialBlueGhostPos);
     setOrangeGhostPos(initialOrangeGhostPos);
     setPacManPos(initialPacManPos);
@@ -85,15 +85,15 @@ const usePacManGame = (
   //   gameStatus
   // );
 
-  const { ghostPos: pinkGhostPos, setGhostPos: setPinkGhostPos } = useGhost(
-    Cell.PinkGhost,
-    initialPinkGhostPos,
-    gameBoard,
-    pacManPos,
-    pacManDirection,
-    speedyPinkyAI,
-    gameStatus
-  );
+  // const { ghostPos: pinkGhostPos, setGhostPos: setPinkGhostPos } = useGhost(
+  //   Cell.PinkGhost,
+  //   initialPinkGhostPos,
+  //   gameBoard,
+  //   pacManPos,
+  //   pacManDirection,
+  //   speedyPinkyAI,
+  //   gameStatus
+  // );
 
   // const { ghostPos: blueGhostPos, setGhostPos: setBlueGhostPos } = useGhost(
   //   Cell.BlueGhost,
@@ -117,7 +117,7 @@ const usePacManGame = (
 
   const ghostPositions = [
     // redGhostPos,
-    pinkGhostPos,
+    // pinkGhostPos,
     // blueGhostPos,
     orangeGhostPos,
   ];
