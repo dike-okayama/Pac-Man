@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const press_start_2p = Press_Start_2P({ weight: ["400"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Pac-Man",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={press_start_2p.className}>{children}</body>
     </html>
   );
 }
