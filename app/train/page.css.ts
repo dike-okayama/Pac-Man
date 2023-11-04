@@ -22,10 +22,16 @@ export const box = style({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  border: "2px solid #fefefe",
+  border: "3px solid #fefefe",
+  borderRadius: "5%",
   cursor: "pointer",
+  gap: "1rem",
 });
 
 export const trainButton = style({
-  border: "2px solid red",
+  width: "150px",
+  height: "150px",
+  borderColor: "red",
+  borderRadius: "50%",
+  textAlign: "center",
 });
