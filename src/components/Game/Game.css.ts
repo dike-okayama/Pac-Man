@@ -19,6 +19,25 @@ export const box = style({
   userSelect: "none",
 });
 
+export const field_ = style({
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateRows: "repeat(3, 1fr)",
+  gap: "3px",
+});
+
+export const box_ = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  border: "1px solid white",
+  userSelect: "none",
+  height: "10vh",
+  width: "10vh",
+  fontSize: "8px",
+});
+
 export const predicted = style({
   border: "1px solid green",
 });

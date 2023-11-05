@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import usePacManGame from "../../hooks/usePacManGame";
 import Board from "../Board/Board";
+import Draggable from "react-draggable";
 
 import { controllerDataset, train, predict, init } from "../../services/model";
 import { initialGameBoard } from "./initialBoard";
@@ -85,6 +86,77 @@ export default function Game() {
           display: "none",
         }}
       />
+      {isTrained && !isTraining && (
+        <Draggable>
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
+              cursor: "move",
+              zIndex: "100",
+            }}
+          >
+            <div className={styles.field_}>
+              <div></div>
+              <div
+                className={styles.box_}
+                style={{
+                  border:
+                    prediction === 0 ? "1px solid green" : "1px solid white",
+                }}
+              >
+                UP
+              </div>
+              <div></div>
+              <div
+                className={styles.box_}
+                style={{
+                  border:
+                    prediction === 2 ? "1px solid green" : "1px solid white",
+                }}
+              >
+                LEFT
+              </div>
+              <div className={styles.box_} style={{ position: "relative" }}>
+                <video
+                  id="webcamDummy"
+                  autoPlay
+                  playsInline
+                  muted
+                  height={224}
+                  width={224}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    WebkitTransform: "scaleX(-1)",
+                  }}
+                />
+              </div>
+              <div
+                className={styles.box_}
+                style={{
+                  border:
+                    prediction === 3 ? "1px solid green" : "1px solid white",
+                }}
+              >
+                RIGHT
+              </div>
+              <div></div>
+              <div
+                className={styles.box_}
+                style={{
+                  border:
+                    prediction === 1 ? "1px solid green" : "1px solid white",
+                }}
+              >
+                DOWN
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </Draggable>
+      )}
       <div className={styles.container}>
         {gameStatus !== GameStatus.ReadyToStart && (
           <>
