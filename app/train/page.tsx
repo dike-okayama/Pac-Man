@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import BackButton from "../components/BackButton/BackButton";
+import Webcam from "../components/Webcam/Webcam";
 import * as styles from "./page.css";
 
 export default function Train() {
@@ -9,23 +10,21 @@ export default function Train() {
     <div className={styles.trainRoot}>
       <BackButton />
       <div className={styles.boxContainer}>
-        <div></div>
+        <div />
         <DirectionBox name="UP" />
-        <div></div>
+        <div />
         <DirectionBox name="LEFT" />
-        <div></div>
+        <div className={styles.box}>
+          <Webcam />
+        </div>
         <DirectionBox name="RIGHT" />
-        <div></div>
+        <div />
         <DirectionBox name="DOWN" />
         <TrainButtonBox />
       </div>
     </div>
   );
 }
-
-type DirectionBoxProps = {
-  name: "UP" | "LEFT" | "RIGHT" | "DOWN";
-};
 
 const buttonShapeMapping = {
   UP: { borderTopLeftRadius: "50%", borderTopRightRadius: "50%" },
@@ -34,7 +33,7 @@ const buttonShapeMapping = {
   DOWN: { borderBottomLeftRadius: "50%", borderBottomRightRadius: "50%" },
 };
 
-const DirectionBox = ({ name }: DirectionBoxProps) => {
+const DirectionBox = ({ name }: { name: "UP" | "LEFT" | "RIGHT" | "DOWN" }) => {
   const [count, setCount] = useState(0);
   const [isMouseDown, setIsMouseDown] = useState(false);
 

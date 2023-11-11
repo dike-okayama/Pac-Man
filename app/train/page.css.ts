@@ -19,6 +19,7 @@ export const box = style({
   width: "150px",
   height: "150px",
   display: "flex",
+  overflow: "hidden",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
