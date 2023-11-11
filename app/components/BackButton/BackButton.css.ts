@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const button = style({
   width: "30%",
   padding: "1rem",
-  minWidth: "500px",
+  minWidth: "580px",
   textAlign: "left",
   cursor: "pointer",
 });
