@@ -4,11 +4,11 @@ import { useEffect, useState, useMemo, useRef } from "react";
 
 import * as tf from "@tensorflow/tfjs";
 
-import BackButton from "@/app/components/BackButton/BackButton";
-import Webcam from "@/app/components/Webcam/Webcam";
-import { dataset, addData } from "@/app/services/dataset";
-import { train, predict } from "@/app/services/model";
-import type { Class } from "@/app/types/model";
+import BackButton from "@/app/_components/BackButton/BackButton";
+import Webcam from "@/app/_components/Webcam/Webcam";
+import { dataset, addData } from "@/app/_services/dataset";
+import { train, predict } from "@/app/_services/model";
+import type { Class } from "@/app/_types/model";
 
 import * as styles from "./page.css";
 

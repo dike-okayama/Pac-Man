@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArcadeButtonFlat as ArcadeButton } from "./components/ArcadeButton/ArcadeButton";
+import { ArcadeButtonFlat as ArcadeButton } from "@/app/_components/ArcadeButton/ArcadeButton";
 import * as styles from "./page.css";
 
 export default function Home() {

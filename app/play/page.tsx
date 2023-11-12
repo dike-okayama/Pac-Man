@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import BackButton from "../components/BackButton/BackButton";
+
+import BackButton from "@/app/_components/BackButton/BackButton";
+
 import * as styles from "./page.css";
 import boardData from "./board-data.json";
 

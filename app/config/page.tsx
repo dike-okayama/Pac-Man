@@ -1,4 +1,5 @@
-import BackButton from "../components/BackButton/BackButton";
+import BackButton from "@/app/_components/BackButton/BackButton";
+
 import * as styles from "./page.css";
 
 export default function Config() {
