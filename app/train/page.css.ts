@@ -19,6 +19,7 @@ export const box = style({
   width: "150px",
   height: "150px",
   display: "flex",
+  position: "relative",
   overflow: "hidden",
   flexDirection: "column",
   alignItems: "center",
@@ -29,10 +30,22 @@ export const box = style({
   gap: "1rem",
 });
 
+export const boxHighlighted = style({
+  borderColor: "green",
+});
+
 export const trainButton = style({
   width: "150px",
   height: "150px",
   borderColor: "red",
   borderRadius: "50%",
   textAlign: "center",
+});
+
+export const thumbnail = style({
+  width: "100%",
+  height: "100%",
+  position: "absolute",
+  transform: "scaleX(-1)",
+  opacity: 0.5,
 });

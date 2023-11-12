@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
 import * as styles from "./Webcam.css";
 
-export default function Webcam() {
-  async function enableCam() {
+export default function Webcam({
+  innerRef,
+}: {
+  innerRef?: React.Ref<HTMLVideoElement>;
+}) {
+  const enableCam = async () => {
     if (!hasGetUserMedia()) {
       alert(
         "Your browser cannot stream from your webcam. Please switch browsers."
@@ -22,13 +27,20 @@ export default function Webcam() {
     const videoElement = document.querySelector("#video") as HTMLVideoElement;
 
     if (videoElement !== null) videoElement.srcObject = stream;
-  }
+  };
 
   useEffect(() => {
     enableCam();
   });
 
-  return <video id="video" autoPlay={true} className={styles.webcam} />;
+  return (
+    <video
+      id="video"
+      autoPlay={true}
+      className={styles.webcam}
+      ref={innerRef}
+    />
+  );
 }
 
 function hasGetUserMedia() {
