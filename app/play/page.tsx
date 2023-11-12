@@ -60,7 +60,7 @@ const Pacman = () => {
 const Ghost = ({ color }: { color: string }) => {
   return (
     <div className={styles.cell}>
-      <Image src={`/ghost-${color}.png`} alt="ghost" height={20} width={20} />
+      <Image src={`/ghost-${color}.webp`} alt="ghost" height={20} width={20} />
     </div>
   );
 };
