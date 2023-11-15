@@ -13,15 +13,9 @@ export const board = style({
   flexDirection: "column",
 });
 
-export const row = style({
-  display: "flex",
-  flexDirection: "row",
-});
-
-export const cell = style({
-  width: "30px",
-  height: "30px",
-  border: "5px solid #0e0e0e",
+export const message = style({
+  marginTop: "10px",
+  height: "20px",
 });
 
 export const food = style({

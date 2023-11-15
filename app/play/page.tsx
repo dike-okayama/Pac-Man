@@ -1,66 +1,63 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import BackButton from "@/app/_components/BackButton/BackButton";
+import PacmanEngine from "@/app/_services/pacmanEngine";
 
+import { Direction } from "@/app/_types/pacman";
 import * as styles from "./page.css";
-import boardData from "./board-data.json";
+
+type Message = "Ready!" | "" | "GAME OVER";
 
 export default function Play() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [displayedText, setDisplayedText] = useState<Message>("");
 
   useEffect(() => {
-    if (!isPlaying) return;
-  }, [isPlaying]);
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const pacmanEngine = new PacmanEngine(ctx);
+    addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "ArrowUp":
+          pacmanEngine.pacman.changeDirection(Direction.Up);
+          break;
+        case "ArrowDown":
+          pacmanEngine.pacman.changeDirection(Direction.Down);
+          break;
+        case "ArrowLeft":
+          pacmanEngine.pacman.changeDirection(Direction.Left);
+          break;
+        case "ArrowRight":
+          pacmanEngine.pacman.changeDirection(Direction.Right);
+          break;
+      }
+    });
+
+    pacmanEngine.animate(true);
+    setDisplayedText("Ready!");
+    const timer = setTimeout(() => {
+      setDisplayedText("");
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+      pacmanEngine.isPlaying = false;
+    };
+  }, []);
 
   return (
     <div className={styles.playRoot}>
       <BackButton />
       <div className={styles.board}>
-        {boardData.map((row, rowIndex) => (
-          <div className={styles.row} key={rowIndex}>
-            {row.map((cell, cellIndex) => (
-              <div className={styles.cell} key={cellIndex}>
-                {cell === 0 && <Food />}
-                {cell === 1 && <Wall color="blue" />}
-                {cell === 2 && <Pacman />}
-                {cell === 3 && <Ghost color="red" />}
-                {cell === 4 && <Ghost color="pink" />}
-                {cell === 5 && <Ghost color="orange" />}
-                {cell === 7 && <Wall color="red" />}
-                {cell === 8 && <Wall color="green" />}
-                {cell === 9 && <Wall color="yellow" />}
-              </div>
-            ))}
-          </div>
-        ))}
+        <canvas ref={canvasRef}></canvas>
       </div>
+      <p className={styles.message}>{displayedText}</p>
     </div>
   );
 }
-
-const Wall = ({ color }: { color: string }) => {
-  return <div className={styles.cell} style={{ backgroundColor: color }}></div>;
-};
-
-const Food = () => {
-  return <div className={`${styles.cell} ${styles.food}`}></div>;
-};
-
-const Pacman = () => {
-  return (
-    <div className={styles.cell}>
-      <Image src="/pacman.svg" alt="pacman" height={20} width={20} />
-    </div>
-  );
-};
-
-const Ghost = ({ color }: { color: string }) => {
-  return (
-    <div className={styles.cell}>
-      <Image src={`/ghost-${color}.webp`} alt="ghost" height={20} width={20} />
-    </div>
-  );
-};
