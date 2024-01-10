@@ -71,6 +71,7 @@ export default class PacmanEngine {
   frame: number;
   board: Board;
   pacman: Pacman;
+  prePacmanPos: { x: number; y: number };
   ghosts: BaseGhost[];
   isPlaying: boolean;
 
@@ -83,6 +84,7 @@ export default class PacmanEngine {
 
     this.board = JSON.parse(JSON.stringify(initialBoard));
     this.pacman = new Pacman(9, 9);
+    this.prePacmanPos = { x: -1, y: -1 };
 
     this.ghosts = [];
     if (initialGhostPos.red.x !== -1 && initialGhostPos.red.y !== -1) {
@@ -209,7 +211,7 @@ export default class PacmanEngine {
     }
   }
 
-  private drawPacman() {
+  private drawPacman(argument: number = 45) {
     this.context.beginPath();
     this.context.fillStyle = "yellow";
 
@@ -220,8 +222,8 @@ export default class PacmanEngine {
       centerX,
       centerY,
       CELL_SIZE / 2.5,
-      toRad(315 - 90 * this.pacman.direction),
-      toRad(40 - 90 * this.pacman.direction),
+      toRad(-argument - 90 * this.pacman.direction),
+      toRad(argument - 90 * this.pacman.direction),
       true
     );
     this.context.fill();
@@ -235,12 +237,16 @@ export default class PacmanEngine {
 
     this.context.moveTo(centerX, centerY);
     this.context.lineTo(
-      centerX + radius * Math.sin(toRad(45 + 90 * this.pacman.direction)),
-      centerY + radius * Math.cos(toRad(45 + 90 * this.pacman.direction))
+      centerX +
+        radius * Math.sin(toRad(90 - argument + 90 * this.pacman.direction)),
+      centerY +
+        radius * Math.cos(toRad(90 - argument + 90 * this.pacman.direction))
     );
     this.context.lineTo(
-      centerX + radius * Math.sin(toRad(135 + 90 * this.pacman.direction)),
-      centerY + radius * Math.cos(toRad(135 + 90 * this.pacman.direction))
+      centerX +
+        radius * Math.sin(toRad(90 + argument + 90 * this.pacman.direction)),
+      centerY +
+        radius * Math.cos(toRad(90 + argument + 90 * this.pacman.direction))
     );
 
     this.context.fill();
@@ -386,7 +392,18 @@ export default class PacmanEngine {
     }
 
     this.resetCanvas();
-    this.render();
+    this.drawBoard();
+
+    const pacmanMouthArgument = (frame: number) => {
+      if (frame < 5) return 10;
+      if (frame < 10) return 45;
+      if (frame < 15) return 80;
+      if (frame < 20) return 45;
+      return 10;
+    };
+    const pacmanFrame = this.frame % 25;
+    this.drawPacman(pacmanMouthArgument(pacmanFrame));
+    this.drawGhosts();
 
     if (this.isPlaying) {
       requestAnimationFrame(() => {
