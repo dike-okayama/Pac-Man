@@ -4,7 +4,6 @@ const withVanillaExtract = createVanillaExtractPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath: "/pac-man",
   reactStrictMode: false,
 };
 
